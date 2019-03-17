@@ -77,3 +77,4 @@ C:\data\WebApi\WebApi\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\data\WebApi\WebApi\bin\System.Web.Http.Owin.xml
 C:\data\WebApi\WebApi\obj\Debug\WebApi.dll
 C:\data\WebApi\WebApi\obj\Debug\WebApi.pdb
+C:\data\WebApi\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache

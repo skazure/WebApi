@@ -14,44 +14,44 @@ using WebApi.Models;
 namespace WebApi.Controllers
 {
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-    public class UsersController : ApiController
+    public class UserTasksController : ApiController
     {
         private DashboardApiEntities db = new DashboardApiEntities();
 
-        // GET: api/Users
-        public IQueryable<User> GetUsers()
+        // GET: api/UserTasks
+        public IQueryable<UserTask> GetUserTasks()
         {
-            return db.Users;
+            return db.UserTasks;
         }
 
-        // GET: api/Users/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult GetUser(int id)
+        // GET: api/UserTasks/5
+        [ResponseType(typeof(UserTask))]
+        public IHttpActionResult GetUserTask(int id)
         {
-            User user = db.Users.Find(id);
-            if (user == null)
+            UserTask userTask = db.UserTasks.Find(id);
+            if (userTask == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(userTask);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/UserTasks/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUser(int id, User user)
+        public IHttpActionResult PutUserTask(int id, UserTask userTask)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.ProductId)
+            if (id != userTask.TaskId)
             {
                 return BadRequest();
             }
 
-            db.Entry(user).State = EntityState.Modified;
+            db.Entry(userTask).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserTaskExists(id))
                 {
                     return NotFound();
                 }
@@ -72,16 +72,16 @@ namespace WebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Users
-        [ResponseType(typeof(User))]
-        public IHttpActionResult PostUser(User user)
+        // POST: api/UserTasks
+        [ResponseType(typeof(UserTask))]
+        public IHttpActionResult PostUserTask(UserTask userTask)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Users.Add(user);
+            db.UserTasks.Add(userTask);
 
             try
             {
@@ -89,7 +89,7 @@ namespace WebApi.Controllers
             }
             catch (DbUpdateException)
             {
-                if (UserExists(user.ProductId))
+                if (UserTaskExists(userTask.TaskId))
                 {
                     return Conflict();
                 }
@@ -99,23 +99,23 @@ namespace WebApi.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = user.ProductId }, user);
+            return CreatedAtRoute("DefaultApi", new { id = userTask.TaskId }, userTask);
         }
 
-        // DELETE: api/Users/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult DeleteUser(int id)
+        // DELETE: api/UserTasks/5
+        [ResponseType(typeof(UserTask))]
+        public IHttpActionResult DeleteUserTask(int id)
         {
-            User user = db.Users.Find(id);
-            if (user == null)
+            UserTask userTask = db.UserTasks.Find(id);
+            if (userTask == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(user);
+            db.UserTasks.Remove(userTask);
             db.SaveChanges();
 
-            return Ok(user);
+            return Ok(userTask);
         }
 
         protected override void Dispose(bool disposing)
@@ -127,9 +127,9 @@ namespace WebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UserExists(int id)
+        private bool UserTaskExists(int id)
         {
-            return db.Users.Count(e => e.ProductId == id) > 0;
+            return db.UserTasks.Count(e => e.TaskId == id) > 0;
         }
     }
 }

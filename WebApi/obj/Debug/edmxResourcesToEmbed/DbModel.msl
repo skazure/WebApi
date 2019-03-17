@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DashboarApiModelStoreContainer" CdmEntityContainer="DashboarApiEntities">
+    <EntitySetMapping Name="Reminders">
+      <EntityTypeMapping TypeName="DashboarApiModel.Reminder">
+        <MappingFragment StoreEntitySet="Reminder">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="ReminderType" ColumnName="ReminderType" />
+          <ScalarProperty Name="ExpiringOn" ColumnName="ExpiringOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DashboarApiModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTasks">
+      <EntityTypeMapping TypeName="DashboarApiModel.UserTask">
+        <MappingFragment StoreEntitySet="UserTask">
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+          <ScalarProperty Name="AssignedOn" ColumnName="AssignedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

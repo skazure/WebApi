@@ -14,44 +14,44 @@ using WebApi.Models;
 namespace WebApi.Controllers
 {
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-    public class UsersController : ApiController
+    public class RemindersController : ApiController
     {
         private DashboardApiEntities db = new DashboardApiEntities();
 
-        // GET: api/Users
-        public IQueryable<User> GetUsers()
+        // GET: api/Reminders
+        public IQueryable<Reminder> GetReminders()
         {
-            return db.Users;
+            return db.Reminders;
         }
 
-        // GET: api/Users/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult GetUser(int id)
+        // GET: api/Reminders/5
+        [ResponseType(typeof(Reminder))]
+        public IHttpActionResult GetReminder(int id)
         {
-            User user = db.Users.Find(id);
-            if (user == null)
+            Reminder reminder = db.Reminders.Find(id);
+            if (reminder == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(reminder);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Reminders/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUser(int id, User user)
+        public IHttpActionResult PutReminder(int id, Reminder reminder)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.ProductId)
+            if (id != reminder.RequestId)
             {
                 return BadRequest();
             }
 
-            db.Entry(user).State = EntityState.Modified;
+            db.Entry(reminder).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!ReminderExists(id))
                 {
                     return NotFound();
                 }
@@ -72,16 +72,16 @@ namespace WebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Users
-        [ResponseType(typeof(User))]
-        public IHttpActionResult PostUser(User user)
+        // POST: api/Reminders
+        [ResponseType(typeof(Reminder))]
+        public IHttpActionResult PostReminder(Reminder reminder)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Users.Add(user);
+            db.Reminders.Add(reminder);
 
             try
             {
@@ -89,7 +89,7 @@ namespace WebApi.Controllers
             }
             catch (DbUpdateException)
             {
-                if (UserExists(user.ProductId))
+                if (ReminderExists(reminder.RequestId))
                 {
                     return Conflict();
                 }
@@ -99,23 +99,23 @@ namespace WebApi.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = user.ProductId }, user);
+            return CreatedAtRoute("DefaultApi", new { id = reminder.RequestId }, reminder);
         }
 
-        // DELETE: api/Users/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult DeleteUser(int id)
+        // DELETE: api/Reminders/5
+        [ResponseType(typeof(Reminder))]
+        public IHttpActionResult DeleteReminder(int id)
         {
-            User user = db.Users.Find(id);
-            if (user == null)
+            Reminder reminder = db.Reminders.Find(id);
+            if (reminder == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(user);
+            db.Reminders.Remove(reminder);
             db.SaveChanges();
 
-            return Ok(user);
+            return Ok(reminder);
         }
 
         protected override void Dispose(bool disposing)
@@ -127,9 +127,9 @@ namespace WebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UserExists(int id)
+        private bool ReminderExists(int id)
         {
-            return db.Users.Count(e => e.ProductId == id) > 0;
+            return db.Reminders.Count(e => e.RequestId == id) > 0;
         }
     }
 }
