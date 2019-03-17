@@ -39,6 +39,7 @@ namespace WebApi.Controllers
 
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
+        [Route("UpdateProductDetails")]
         public IHttpActionResult PutUser(int id, User user)
         {
             if (!ModelState.IsValid)
@@ -73,7 +74,7 @@ namespace WebApi.Controllers
         }
 
         // POST: api/Users
-        [ResponseType(typeof(User))]
+        [ResponseType(typeof(User))]        
         public IHttpActionResult PostUser(User user)
         {
             if (!ModelState.IsValid)
