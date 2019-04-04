@@ -13,7 +13,7 @@ using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:4200,http://localhost:4201,http://localhost:9877", headers: "*", methods: "*")]
     public class RemindersController : ApiController
     {
         private DashboardApiEntities db = new DashboardApiEntities();
